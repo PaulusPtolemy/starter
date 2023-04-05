@@ -8,9 +8,6 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: 'testy',
+  name: 'TestyComponent',
 })
-</script>
-
-<script setup lang="ts">
 </script>
