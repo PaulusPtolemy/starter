@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import { $api } from "~/plugins/axios"
+import { $api } from "~/plugins/api"
 
 export interface IProduct {
     id: number;
@@ -23,14 +23,21 @@ export interface IProductImages {
 
 
 export const useProductsStore = defineStore('productsStore', () => {
-    const productList = ref<IProduct[]>([])
+    const productList = ref<IProduct[]>(null)
 
-    const getProducts = async () : Promise<void> => {
+
+    const getProducts = async () => {
         productList.value = await $api.productsService.getProducts()
+        return productList.value
+    }
+
+    const removeItem = () => {
+        productList.value.shift()
     }
 
     return {
         productList,
-        getProducts
+        getProducts,
+        removeItem
     }
 })

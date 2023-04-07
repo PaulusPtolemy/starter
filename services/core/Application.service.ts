@@ -1,59 +1,54 @@
-import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { $Fetch, FetchOptions } from 'ofetch'
 
 export class ApplicationService {
-    constructor (private httpClient: AxiosInstance) {}
+    constructor(private httpClient: $Fetch) { }
 
-    get (path: string, params = {}, requestConfig = {}) {
-        return this.request({
+    get(path: string, params = {}, requestConfig = {}) {
+        return this.request(path, {
             method: 'GET',
-            url: path,
             params,
             ...requestConfig,
         })
     }
 
-    post (path: string, data = {}, requestConfig = {}) {
-        return this.request({
+    post(path: string, data = {}, requestConfig = {}) {
+        return this.request(path, {
             method: 'POST',
-            url: path,
-            data,
+            body: data,
             ...requestConfig,
         })
     }
 
-    put (path: string, data = {}, requestConfig = {}) {
-        return this.request({
+    put(path: string, data = {}, requestConfig = {}) {
+        return this.request(path, {
             method: 'PUT',
-            url: path,
-            data,
+            body: data,
             ...requestConfig,
         })
     }
 
-    delete (path: string, params = {}, requestConfig = {}) {
-        return this.request({
+    delete(path: string, params = {}, requestConfig = {}) {
+        return this.request(path, {
             method: 'DELETE',
-            url: path,
             params,
             ...requestConfig,
         })
     }
 
-    patch (path: string, data = {}, requestConfig = {}) {
-        return this.request({
+    patch(path: string, data = {}, requestConfig = {}) {
+        return this.request(path, {
             method: 'PATCH',
-            url: path,
-            data,
+            body: data,
             ...requestConfig,
         })
     }
 
-    async request (options: AxiosRequestConfig) {
+    async request(url: string, options: FetchOptions) {
         const config = {
             ...options,
             responseType: options.responseType || 'json',
         }
-        const response = await this.httpClient(config)
-        return response?.data?.data || {}
+        const response = await this.httpClient(url, config)
+        return response?.data || {}
     }
 }

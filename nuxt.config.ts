@@ -1,10 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import appConfig from "./core/config"
+
 export default defineNuxtConfig({
+    pages: true,
+
     modules: [
         '@pinia/nuxt',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/i18n',
+        '@element-plus/nuxt',
+        'nuxt-typed-router',
+        '@nuxt/image-edge',
     ],
 
     buildModules: [
@@ -19,20 +25,9 @@ export default defineNuxtConfig({
     },
 
     plugins: [
-        '~/plugins/axios.ts',
+        '~/plugins/api.ts',
         '~/plugins/server-init.server.ts',
     ],
-
-    build: {
-        postcss: {
-            postcssOptions: {
-                plugins: {
-                    tailwindcss: {},
-                    autoprefixer: {},
-                },
-            },
-        },
-    },
 
     css: [
         '@/assets/css/main.css',
@@ -42,6 +37,10 @@ export default defineNuxtConfig({
         families: {
             Rubik: true,
         }
+    },
+
+    elementPlus: { 
+        
     },
 
     i18n: {
@@ -55,9 +54,8 @@ export default defineNuxtConfig({
                 file: 'ja.json'
             },
         ],
-        lazy: true,
         langDir: 'locales',
-        defaultLocale: 'en',
+        defaultLocale: 'en', 
     },
 
     runtimeConfig: {

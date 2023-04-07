@@ -1,34 +1,37 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
+  <div>
+    <el-button
+      type="primary"
+      :disabled="isEmptyList"
+      @click="productsStore.removeItem()"
+    >
+      {{ $t('removeFirstCard') }}
+    </el-button>
     <span>
       {{ $t('hello') }}
     </span>
-    <div @click="setLocale('ja')">
-      {{ locale }}
-    </div>
-    {{ productList }}
-  </h1>
+    <pages-index-list
+      v-if="!isEmptyList"
+      :cards-list="data"
+    />
+  </div>
 </template>
 
-<script lang="ts">
-import { useProductsStore } from "~/store/products";
+<script lang="ts" setup>
+import { useProductsStore } from "~/store/products"
+import { defineAsyncComponent } from 'vue'
+import { isEmpty } from "lodash"
 
-export default defineComponent({
-  name:'IndexPage',
+const PagesIndexList = defineAsyncComponent(() =>
+  import('~/components/pages/index/list/PagesIndexList.vue')
+)
 
-  async setup() {
-    const { locale, locales, setLocale } = useI18n()
-    const productsStore = useProductsStore()
-    await productsStore.getProducts()
+const productsStore = useProductsStore()
 
-    const { productList } = productsStore
+const { data } = await useAsyncData('products', () => productsStore.getProducts())
 
-    return {
-      productList,
-      setLocale,
-      locale,
-      locales
-    }
-  }
+const isEmptyList = computed(() => {
+  return isEmpty(data.value)
 })
+
 </script>

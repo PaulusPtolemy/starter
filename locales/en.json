@@ -1,3 +1,5 @@
 {
-  "hello": "Hey asdasd!"
+  "hello": "Hello!",
+  "about": "About",
+  "removeFirstCard": "Remove first card"
 }

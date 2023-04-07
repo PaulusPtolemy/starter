@@ -1,13 +1,9 @@
 <template>
   <div>
-    About
+    {{ $t('about') }}
   </div>
 </template>
 
-<script lang="ts">
-
-export default defineComponent({
-  name:'AboutPage',
-})
+<script lang="ts" setup>
 
 </script>
