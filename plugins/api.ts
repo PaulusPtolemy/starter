@@ -1,44 +1,48 @@
-import { $fetch } from 'ofetch'
+import { $fetch } from "ofetch";
 
-import { ProductsService } from "~/services/Products.service"
+import { ProductsService } from "~/services/Products.service";
 
-let $api: IApi
+let $api: IApi;
 export interface IApi {
-    productsService: ProductsService
+  productsService: ProductsService;
 }
 
 export default defineNuxtPlugin(() => {
-    const runtimeConfig = useRuntimeConfig()
+  const runtimeConfig = useRuntimeConfig();
 
-    const fetchWrapper = $fetch.create({
-        baseURL: runtimeConfig.public.baseUrl,
+  const fetchWrapper = $fetch.create({
+    baseURL: runtimeConfig.public.baseUrl,
 
-        async onRequest({ request }) {
-            console.log(`Making request to ${request} ...`)
-        },
+    async onRequest({ request }) {
+      console.log(`Making request to ${request} ...`);
+    },
 
-        async onRequestError({ request, error }) {
-            console.log(`Request to ${request} failed with: ${error}`)
-        },
+    async onRequestError({ request, error }) {
+      console.log(`Request to ${request} failed with: ${error}`);
+    },
 
-        async onResponse({ request, response }) {
-            console.log(`Response from ${request} ---> Success with ${response.status} status`)
-        },
+    async onResponse({ request, response }) {
+      console.log(
+        `Response from ${request} ---> Success with ${response.status} status`
+      );
+    },
 
-        async onResponseError({ request, response, error }) {
-            console.log(`Response from ${request} ---> Failed with ${response.status} status with: ${error}`)
-        },
-    })
+    async onResponseError({ request, response, error }) {
+      console.log(
+        `Response from ${request} ---> Failed with ${response.status} status with: ${error}`
+      );
+    },
+  });
 
-    $api = {
-        productsService: new ProductsService(fetchWrapper)
-    }
+  $api = {
+    productsService: new ProductsService(fetchWrapper),
+  };
 
-    return {
-        provide: {
-            api: $api
-        }
-    }
-})
+  return {
+    provide: {
+      api: $api,
+    },
+  };
+});
 
-export { $api }
+export { $api };

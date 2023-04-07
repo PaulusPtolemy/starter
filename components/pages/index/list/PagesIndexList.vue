@@ -7,19 +7,15 @@
     />
   </div>
 </template>
-  
-<script setup lang='ts'>
 
-import { IProduct } from '~/store/products'
+<script setup lang="ts">
+import { IProduct } from "~/shared/types/products";
 
 export interface Props {
-  cardsList: IProduct[] | null
+  cardsList: IProduct[] | null;
 }
 
-defineProps<Props>()
-  
+defineProps<Props>();
 </script>
-  
-<style>
-  
-</style>
+
+<style></style>

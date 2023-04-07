@@ -1,26 +1,24 @@
 <template>
   <el-card>
-    <nuxt-img
-      :src="card.image"
-      loading="lazy"
-    />
-    <div>
+    <nuxt-img :src="card.image" loading="lazy" />
+    <div class="test">
       <span> {{ card.name }}</span>
     </div>
   </el-card>
 </template>
 
-<script setup lang='ts'>
-import { IProduct } from '~/store/products'
+<script setup lang="ts">
+import { IProduct } from "~/shared/types/products";
 
 export interface Props {
-  card: IProduct
+  card: IProduct;
 }
 
-defineProps<Props>()
-  
+defineProps<Props>();
 </script>
-  
-<style>
-  
+
+<style lang="scss">
+.test {
+  @apply mr-2 flex justify-end px-0;
+}
 </style>

@@ -5,6 +5,6 @@ export const useIsMobile = () => {
   const isMobile = breakpoints.smaller("lg");
 
   return {
-    isMobile
-  }
-}
+    isMobile,
+  };
+};

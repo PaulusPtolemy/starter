@@ -16,17 +16,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n } from "vue-i18n"
+import { useI18n } from "vue-i18n";
 
-const { locale, locales, setLocale } = useI18n()
+const { locale, locales, setLocale } = useI18n();
 
-const chosenLocale = ref(locale)
+const chosenLocale = ref(locale);
 
 const locals = computed(() => {
-  return locales.value.map(e => typeof e === 'string' ? e : e.code)
-})
+  return locales.value.map((e) => (typeof e === "string" ? e : e.code));
+});
 
 function onSelectChange(value: string) {
-  setLocale(value)
+  setLocale(value);
 }
 </script>
